@@ -424,8 +424,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b5cf6d71e4f7f4a87881f2e4ca4914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followSpeed: 20
-  rotSpeed: 20
+  followSpeed: 15
+  rotSpeed: 10
   followTarget: {fileID: 1644953174}
 --- !u!4 &819132154
 Transform:
