@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IRobot
 {
-    private Transform player;
+    protected Transform player;
     private GameObject spawnManager;
 
-    public float timeBetweenShoots = 3f;
-    public float timeOfNextShoot = 0f;
+    protected float timeBetweenShoots = 3f;
+    protected float timeOfNextShoot = 0f;
 
     [SerializeField]
     private int health;
@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour, IRobot
 
     protected virtual void Attack()
     {
-
+        
     }
 
     public void GetDamage(int damage)
@@ -67,5 +67,13 @@ public class Enemy : MonoBehaviour, IRobot
         }
     }
 
-
+    protected bool CheckShootAbility()
+    {
+        if (Time.time < timeOfNextShoot)
+        {
+            return false;
+        }
+        timeOfNextShoot = Time.time + timeBetweenShoots;
+        return true;
+    }
 }

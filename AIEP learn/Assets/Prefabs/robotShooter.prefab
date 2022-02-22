@@ -318,7 +318,7 @@ MonoBehaviour:
   timeBetweenShoots: 5
   timeOfNextShoot: 0
   health: 50
-  figtDistance: 8
+  figtDistance: 20
   speed: 3
   projectile: {fileID: 9033910123809897734, guid: 0ddbef7ff47742f4cb164a835ee17d23, type: 3}
   launcer: {fileID: 767337676436951366}

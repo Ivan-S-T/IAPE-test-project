@@ -26,19 +26,15 @@ public class Rocket : MonoBehaviour
         Destroy(gameObject);
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
-        
+        //ABSTRACTION
         var script = other.gameObject.GetComponent<IRobot>();
-        if (script!=null)
+        if (script != null)
         {
             script.GetDamage(damage);
-
         }
 
-
         Destroy(gameObject);
-
     }
 }

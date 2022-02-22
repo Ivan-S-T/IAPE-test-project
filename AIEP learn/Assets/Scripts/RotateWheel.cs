@@ -7,10 +7,6 @@ public class RotateWheel : MonoBehaviour
 {
     private float rotSpeed = 30f;
 
-    
-
-   
-
     private void FixedUpdate()
     {
         transform.Rotate(Vector3.right * rotSpeed * Time.fixedDeltaTime);

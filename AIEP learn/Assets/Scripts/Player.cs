@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour,IRobot
+public class Player : MonoBehaviour, IRobot //POLYMORPHISM
 {
     [SerializeField]
     private int health = 50;
@@ -22,22 +22,18 @@ public class Player : MonoBehaviour,IRobot
     [SerializeField]
     private Transform launcher;
 
-    private Rigidbody rbody;
     private float horizotalInput;
     private float verticalInput;
 
+    //ENCAPSULATION
     public int Health { get => health; set => health = value >= 0 ? value : 0; }
-
-    private void Start()
-    {
-        rbody = GetComponent<Rigidbody>();
-    }
 
     private void Update()
     {
+        //ABSTRACTION
         MovePlayer();
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             LaunchRocket();
         }
@@ -45,8 +41,8 @@ public class Player : MonoBehaviour,IRobot
 
     private void MovePlayer()
     {
-         horizotalInput = Input.GetAxis("Horizontal");
-         verticalInput = Input.GetAxis("Vertical");
+        horizotalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
 
         if (Math.Abs(verticalInput) > wheelLag)
         {
@@ -59,10 +55,7 @@ public class Player : MonoBehaviour,IRobot
 
     }
 
-    //private void FixedUpdate()
-    //{
-    //    rbody.AddForce(transform.forward * verticalInput*speed, ForceMode.Acceleration);
-    //}
+
 
     private void RotateWheel()
     {

@@ -2,23 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShooterEnemy : Enemy
+public class ShooterEnemy : Enemy //INHERITANSE
 {
     [SerializeField]
     private GameObject projectile;
     [SerializeField]
     private Transform launcer;
 
-
-    protected override void Attack()
+    protected override void Attack() //POLYMORPHISM
     {
-        base.Attack();
-        if (Time.time < timeOfNextShoot)
+        if (CheckShootAbility())
         {
-            return;
+            Instantiate(projectile, launcer.position, launcer.rotation);
         }
-        timeOfNextShoot = Time.time + timeBetweenShoots;
-        Instantiate(projectile, launcer.position, launcer.rotation);
-        
     }
 }

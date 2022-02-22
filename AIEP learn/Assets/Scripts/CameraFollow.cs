@@ -10,12 +10,9 @@ public class CameraFollow : MonoBehaviour
     [SerializeField]
     private Transform followTarget;
 
-    
-
     private void LateUpdate()
     {
         transform.position = Vector3.Lerp(transform.position, followTarget.position, followSpeed * Time.deltaTime);
-
         transform.rotation = Quaternion.Lerp(transform.rotation, followTarget.rotation, rotSpeed * Time.deltaTime);
     }
 }
