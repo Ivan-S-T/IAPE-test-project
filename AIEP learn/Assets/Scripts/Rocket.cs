@@ -7,6 +7,9 @@ public class Rocket : MonoBehaviour
     private float speed = 10f;
     private float lifeTime = 2f;
 
+    [SerializeField]
+    private int damage = 10;
+
     private void Start()
     {
         StartCoroutine("SelfDestroy");
@@ -21,5 +24,21 @@ public class Rocket : MonoBehaviour
     {
         yield return new WaitForSeconds(lifeTime);
         Destroy(gameObject);
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        var script = other.gameObject.GetComponent<IRobot>();
+        if (script!=null)
+        {
+            script.GetDamage(damage);
+
+        }
+
+
+        Destroy(gameObject);
+
     }
 }

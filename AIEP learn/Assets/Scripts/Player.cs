@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerKeyboardControl : MonoBehaviour
+public class Player : MonoBehaviour,IRobot
 {
+    [SerializeField]
+    private int health = 50;
     [SerializeField]
     private float speed = 5f;
     [SerializeField]
@@ -20,6 +22,17 @@ public class PlayerKeyboardControl : MonoBehaviour
     [SerializeField]
     private Transform launcher;
 
+    private Rigidbody rbody;
+    private float horizotalInput;
+    private float verticalInput;
+
+    public int Health { get => health; set => health = value >= 0 ? value : 0; }
+
+    private void Start()
+    {
+        rbody = GetComponent<Rigidbody>();
+    }
+
     private void Update()
     {
         MovePlayer();
@@ -32,8 +45,8 @@ public class PlayerKeyboardControl : MonoBehaviour
 
     private void MovePlayer()
     {
-        float horizotalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+         horizotalInput = Input.GetAxis("Horizontal");
+         verticalInput = Input.GetAxis("Vertical");
 
         if (Math.Abs(verticalInput) > wheelLag)
         {
@@ -41,18 +54,30 @@ public class PlayerKeyboardControl : MonoBehaviour
         }
 
         transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime);
-        transform.Rotate(Vector3.up * horizotalInput * RototSpeed * Time.deltaTime*(verticalInput+.5f));
+        transform.Rotate(Vector3.up * horizotalInput * RototSpeed * Time.deltaTime * (verticalInput + .5f));
+
+
     }
+
+    //private void FixedUpdate()
+    //{
+    //    rbody.AddForce(transform.forward * verticalInput*speed, ForceMode.Acceleration);
+    //}
 
     private void RotateWheel()
     {
         wheel.transform.Rotate(Vector3.right * Time.deltaTime * wheelRototSpeed, Space.Self);
     }
 
-    
+
 
     private void LaunchRocket()
     {
         Instantiate(rocketPrefab, launcher.position, launcher.rotation);
+    }
+
+    public void GetDamage(int damage)
+    {
+        Health -= damage;
     }
 }
